@@ -4,8 +4,8 @@ import '../models/provider_profile.dart';
 import '../models/service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
+import '../widgets/live_google_map.dart';
 import '../widgets/live_indicator.dart';
-import '../widgets/mock_map_card.dart';
 import '../widgets/provider_card.dart';
 import '../widgets/shimmer.dart';
 import 'order_tracking_screen.dart';
@@ -76,11 +76,14 @@ class _ProviderMatchingScreenState extends State<ProviderMatchingScreen>
                 const SizedBox(height: 12),
                 _SearchSummary(service: widget.service),
                 const SizedBox(height: 16),
-                const MockMapCard(
-                  height: 310,
-                  providersAvailable: 23,
-                  title: 'بحث نشط',
-                  subtitle: 'أقرب مزود جاهز',
+                LiveGoogleMap(
+                  service: widget.service,
+                  height: 360,
+                  mode: LiveMapMode.matching,
+                  interactive: true,
+                  primaryLabel: 'تأكيد أسرع مزود',
+                  onRequest: () => Navigator.of(context)
+                      .pushNamed(OrderTrackingScreen.routeName),
                 ),
                 const SizedBox(height: 16),
                 _MatchingProgress(controller: _controller),

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/provider_profile.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
+import '../widgets/live_google_map.dart';
 import '../widgets/live_indicator.dart';
-import '../widgets/mock_map_card.dart';
 import '../widgets/provider_card.dart';
+import '../models/service.dart';
 
 class ProviderDashboardScreen extends StatelessWidget {
   const ProviderDashboardScreen({super.key});
@@ -88,12 +89,11 @@ class ProviderDashboardScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 18),
-                const MockMapCard(
-                  height: 250,
-                  providersAvailable: 4,
-                  title: 'طلبات قريبة',
-                  subtitle: 'داخل 3 كم',
-                  showSearch: false,
+                LiveGoogleMap(
+                  service: ServiceCatalog.items.first,
+                  height: 260,
+                  mode: LiveMapMode.compact,
+                  showServiceDrawer: false,
                 ),
                 const SizedBox(height: 22),
                 Text('طلب جديد', style: Theme.of(context).textTheme.titleLarge),

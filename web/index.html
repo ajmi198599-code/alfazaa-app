@@ -7,6 +7,40 @@
     <meta name="description" content="ALFAZAA / الفزعة Flutter UI prototype">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0D0D0D">
+    <!--
+      Google Maps API setup for ALFAZAA.
+
+      Replace GOOGLE_MAPS_API_KEY_HERE with the real restricted browser key in CI/deploy only.
+      Do not commit a private key.
+
+      Future Google Cloud APIs to enable/configure:
+      - Maps JavaScript API: required for Flutter Web map rendering.
+      - Places API: prepared for future place search/autocomplete.
+      - Geocoding API: prepared for future address-to-coordinate flows.
+      - Routes/Directions API: prepared for future real route ETA/polyline.
+    -->
+    <script>
+      window.ALFAZAA_MAPS_CONFIG = {
+        apiKey: "GOOGLE_MAPS_API_KEY_HERE",
+        libraries: "places,marker"
+      };
+
+      (function loadAlfazaaGoogleMaps() {
+        var config = window.ALFAZAA_MAPS_CONFIG || {};
+        var key = config.apiKey || "";
+        var hasUsableKey = key && key !== "GOOGLE_MAPS_API_KEY_HERE";
+        if (!hasUsableKey) return;
+
+        var script = document.createElement("script");
+        script.src = "https://maps.googleapis.com/maps/api/js?key=" +
+          encodeURIComponent(key) +
+          "&libraries=" +
+          encodeURIComponent(config.libraries || "places,marker");
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      })();
+    </script>
     <link rel="manifest" href="manifest.json">
     <title>ALFAZAA</title>
   </head>

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../models/order.dart';
 import '../models/provider_profile.dart';
+import '../models/service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
+import '../widgets/live_google_map.dart';
 import '../widgets/live_indicator.dart';
-import '../widgets/mock_map_card.dart';
 import '../widgets/provider_card.dart';
 import '../widgets/status_timeline.dart';
 import 'chat_screen.dart';
@@ -53,11 +54,13 @@ class OrderTrackingScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 14),
-                const MockMapCard(
-                  height: 300,
-                  providersAvailable: 1,
-                  title: 'مزودك بالطريق',
-                  subtitle: 'يصل خلال 9 دقائق',
+                LiveGoogleMap(
+                  service: ServiceCatalog.items.first,
+                  height: 320,
+                  mode: LiveMapMode.tracking,
+                  primaryLabel: 'محادثة مع المزود',
+                  onRequest: () =>
+                      Navigator.of(context).pushNamed(ChatScreen.routeName),
                 ),
                 const SizedBox(height: 18),
                 Container(

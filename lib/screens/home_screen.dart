@@ -7,8 +7,8 @@ import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
 import '../widgets/bottom_nav.dart';
 import '../widgets/brand_logo.dart';
+import '../widgets/live_google_map.dart';
 import '../widgets/live_indicator.dart';
-import '../widgets/mock_map_card.dart';
 import '../widgets/order_card.dart';
 import '../widgets/provider_card.dart';
 import '../widgets/screen_scaffold.dart';
@@ -82,11 +82,15 @@ class HomeScreen extends StatelessWidget {
             trailing: const LiveIndicator(label: 'مباشر'),
           ),
           const SizedBox(height: 12),
-          const MockMapCard(
-            height: 228,
-            providersAvailable: 23,
-            title: 'متوفرين الآن',
-            subtitle: 'أقرب فزعة 10 دقائق',
+          LiveGoogleMap(
+            service: ServiceCatalog.items.first,
+            height: 330,
+            mode: LiveMapMode.home,
+            primaryLabel: 'اطلب فزعتك الآن',
+            onRequest: () => Navigator.of(context).pushNamed(
+              ProviderMatchingScreen.routeName,
+              arguments: ServiceCatalog.items.first,
+            ),
           ),
           const SizedBox(height: 14),
           ProviderCard(

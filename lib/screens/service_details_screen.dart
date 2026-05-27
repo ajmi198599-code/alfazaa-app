@@ -4,8 +4,8 @@ import '../models/provider_profile.dart';
 import '../models/service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_button.dart';
+import '../widgets/live_google_map.dart';
 import '../widgets/live_indicator.dart';
-import '../widgets/mock_map_card.dart';
 import '../widgets/provider_card.dart';
 import 'provider_matching_screen.dart';
 
@@ -128,12 +128,11 @@ class ServiceDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 18),
-                const MockMapCard(
-                  height: 220,
-                  providersAvailable: 12,
-                  title: 'مزودين للخدمة',
-                  subtitle: 'داخل جدة',
-                  showSearch: false,
+                LiveGoogleMap(
+                  service: service,
+                  height: 250,
+                  mode: LiveMapMode.compact,
+                  showServiceDrawer: false,
                 ),
                 const SizedBox(height: 22),
                 Text('يشمل الطلب',
